@@ -1,0 +1,10 @@
+keys:
+  - &kid age1eqgx7hrfadac75dcp50j2fara7nt4w4ulc20lavcwnkxt20sau9qxqkl9f
+  - &dmit-lax age18kgxj685xsjgrfwly9lw6sx39pxatw8js3sd6nvu0cjhhgnxwyeqvxv2y4
+
+creation_rules:
+  - path_regex: hosts/dmit-lax/secrets\.yaml
+    key_groups:
+      - age:
+        - *kid
+        - *dmit-lax
