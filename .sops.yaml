@@ -1,6 +1,7 @@
 keys:
   - &kid age1eqgx7hrfadac75dcp50j2fara7nt4w4ulc20lavcwnkxt20sau9qxqkl9f
   - &dmit-lax age18kgxj685xsjgrfwly9lw6sx39pxatw8js3sd6nvu0cjhhgnxwyeqvxv2y4
+  - &oracle-sjc age1rs59r4dx732wr8q3ckdfsraemrpcvx0j4dej9m0rt3n6cx95533q64tudg
 
 creation_rules:
   - path_regex: hosts/dmit-lax/secrets\.yaml
@@ -8,3 +9,8 @@ creation_rules:
       - age:
         - *kid
         - *dmit-lax
+  - path_regex: hosts/oracle-sjc/secrets\.yaml
+    key_groups:
+      - age:
+        - *kid
+        - *oracle-sjc

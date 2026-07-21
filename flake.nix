@@ -14,6 +14,7 @@
   outputs = { ... }@inputs: {
     nixosConfigurations = {
       dmit-lax = import ./hosts/dmit-lax { inherit inputs; };
+      oracle-sjc = import ./hosts/oracle-sjc { inherit inputs; };
     };
   };
 }
