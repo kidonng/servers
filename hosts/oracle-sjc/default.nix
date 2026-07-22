@@ -11,6 +11,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/network.nix
     ../../modules/ssh.nix
     ./hardware.nix
+    ./services/hermes-agent.nix
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
