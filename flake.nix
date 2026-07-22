@@ -9,6 +9,7 @@
     impermanence.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "https://flakehub.com/f/Mic92/sops-nix/0.1.1226";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
   };
 
   outputs = { ... }@inputs: {

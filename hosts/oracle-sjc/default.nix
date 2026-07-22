@@ -6,12 +6,14 @@ inputs.nixpkgs.lib.nixosSystem {
   modules = [
     inputs.determinate.nixosModules.default
     inputs.sops-nix.nixosModules.sops
+    inputs.quadlet-nix.nixosModules.quadlet
     ../../modules/disk-uefi.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/hermes-agent.nix
+    ./services/firecrawl.nix
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
