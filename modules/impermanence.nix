@@ -15,10 +15,10 @@
   fileSystems."/persist".neededForBoot = true;
 
   boot.initrd.systemd.services.rollback = {
-    wantedBy = [ "initrd.target" ];
-    before = [ "sysroot.mount" ];
     requires = [ "initrd-root-device.target" ];
     after = [ "initrd-root-device.target" ];
+    before = [ "sysroot.mount" ];
+    wantedBy = [ "initrd.target" ];
 
     unitConfig.DefaultDependencies = "no";
     serviceConfig = {
