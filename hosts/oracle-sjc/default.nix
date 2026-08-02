@@ -14,6 +14,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ./hardware.nix
     ./services/hermes-agent.nix
     ./services/firecrawl.nix
+    ./services/hindsight.nix
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
