@@ -4,12 +4,12 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { inherit inputs; };
   modules = [
-    inputs.determinate.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     inputs.quadlet-nix.nixosModules.quadlet
     ../../modules/disk-uefi.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
+    ../../modules/nix.nix
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/hermes-agent.nix

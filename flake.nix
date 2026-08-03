@@ -1,8 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/0.1";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    determinate.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "https://flakehub.com/f/nix-community/disko/1.13.0";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "https://flakehub.com/f/nix-community/impermanence/0.1.203";

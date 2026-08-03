@@ -4,11 +4,11 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { inherit inputs; };
   modules = [
-    inputs.determinate.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     ../../modules/disk-bios.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
+    ../../modules/nix.nix
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/sing-box.nix
