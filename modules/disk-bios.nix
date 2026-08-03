@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 
 {
   imports = [ inputs.disko.nixosModules.disko ];
@@ -6,7 +6,7 @@
   disko.devices = {
     disk.vda = {
       type = "disk";
-      device = "/dev/vda";
+      device = lib.mkDefault "/dev/vda";
       content = {
         type = "gpt";
         partitions = {
