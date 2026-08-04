@@ -12,6 +12,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/sing-box.nix
+    ./services/tailscale.nix
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
