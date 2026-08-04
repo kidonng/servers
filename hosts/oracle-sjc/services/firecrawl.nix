@@ -60,7 +60,7 @@ in
         containerConfig = {
           image = "ghcr.io/firecrawl/firecrawl:latest";
           networks = [ networks.firecrawl.ref ];
-          publishPorts = [ "127.0.0.1:3002:3002" ];
+          publishPorts = [ "3002:3002" ];
           environments = commonEnv // {
             HOST = "0.0.0.0";
             PORT = "3002";

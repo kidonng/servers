@@ -118,8 +118,8 @@ in
           image = "ghcr.io/vectorize-io/hindsight:latest-slim";
           networks = [ networks.hindsight.ref ];
           publishPorts = [
-            "127.0.0.1:8888:8888"
-            "127.0.0.1:9999:9999"
+            "8888:8888"
+            "9999:9999"
           ];
           environmentFiles = [
             config.sops.templates."hindsight-env".path
