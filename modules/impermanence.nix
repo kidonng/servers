@@ -5,7 +5,8 @@
 
   environment.persistence."/persist" = {
     directories = [
-      "/var"
+      "/var/lib"
+      "/var/log"
     ];
     files = [
       "/etc/machine-id"

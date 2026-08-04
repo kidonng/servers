@@ -26,7 +26,7 @@
 
   environment.persistence."/persist" = {
     directories = [
-      "/home"
+      "/home/kiki"
     ];
   };
 }
