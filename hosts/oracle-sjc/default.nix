@@ -12,9 +12,10 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/nix.nix
     ../../modules/ssh.nix
     ./hardware.nix
-    ./services/hermes-agent.nix
     ./services/firecrawl.nix
+    ./services/hermes-agent.nix
     ./services/hindsight.nix
+    ./services/tailscale.nix
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
