@@ -42,6 +42,7 @@ in
           networks = [ networks.firecrawl.ref ];
           environments = {
             PORT = "3000";
+            PROXY_SERVER = "100.89.204.14:7890"; # dmit-lax
             MAX_CONCURRENT_PAGES = "10";
           };
           podmanArgs = [ "--cpus=2.0" ];
