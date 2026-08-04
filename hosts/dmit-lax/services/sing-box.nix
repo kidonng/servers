@@ -24,6 +24,11 @@ in
       log.level = "error";
       inbounds = [
         {
+          type = "mixed";
+          listen = "::";
+          listen_port = 7890;
+        }
+        {
           type = "shadowsocks";
           listen = "::";
           listen_port = shadowsocksPort;
