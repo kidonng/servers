@@ -4,7 +4,7 @@ let
   shadowsocksPort = 10724;
   hysteria2Port = 20724;
   sopsConfig = {
-    reloadUnits = [ "sing-box.service" ];
+    reloadUnits = [ config.systemd.services.sing-box.name ];
   };
 in
 {
