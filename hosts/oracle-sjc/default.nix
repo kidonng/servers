@@ -18,7 +18,7 @@ inputs.nixpkgs.lib.nixosSystem {
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
-        age.keyFile = "/var/lib/sops/key.txt";
+        age.keyFile = "/persist/sops-key";
       };
 
       networking.hostName = "oracle-sjc";
