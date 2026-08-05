@@ -2,9 +2,7 @@
 
 {
   sops.secrets = {
-    "tailscale" = {
-      reloadUnits = [ config.systemd.services.tailscaled.name ];
-    };
+    "tailscale" = { };
   };
 
   services.tailscale = {
