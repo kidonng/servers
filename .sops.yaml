@@ -1,7 +1,7 @@
 keys:
   - &kid age1eqgx7hrfadac75dcp50j2fara7nt4w4ulc20lavcwnkxt20sau9qxqkl9f
-  - &dmit-lax age18kgxj685xsjgrfwly9lw6sx39pxatw8js3sd6nvu0cjhhgnxwyeqvxv2y4
-  - &oracle-sjc age1rs59r4dx732wr8q3ckdfsraemrpcvx0j4dej9m0rt3n6cx95533q64tudg
+  - &dmit-lax age12a9uxu793hqpyapu32ngvt8gutk20kwgptmk7huq0wdq7t5nnufqnrfl2t
+  - &oracle-sjc age1zjxnzg42xkykr3gmkjjzl7hjv2wff4f49armsymszas8jzvj2exsmh3ctv
 
 creation_rules:
   - path_regex: hosts/dmit-lax/secrets\.yaml

@@ -20,7 +20,7 @@ inputs.nixpkgs.lib.nixosSystem {
     {
       sops = {
         defaultSopsFile = ./secrets.yaml;
-        age.keyFile = "/persist/sops-key";
+        age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       };
 
       networking.hostName = "oracle-sjc";

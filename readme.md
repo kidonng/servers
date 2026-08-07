@@ -11,13 +11,13 @@ cp hosts/{existing-host,new-host}/default.nix
 $EDITOR flake.nix
 
 # Configure key & stub secrets
-age-keygen -o sops-key
+mkdir -p extra/persist/etc/ssh
+ssh-keygen -t ed25519 -N "" -f extra/persist/etc/ssh/ssh_host_ed25519_key
+ssh-to-age -i extra/persist/etc/ssh/ssh_host_ed25519_key.pub
 $EDITOR .sops.yaml
 sops hosts/new-host/secrets.yaml
 
 # Deploy
-mkdir -p extra/persist
-cp sops-key extra/persist
 # https://github.com/nix-community/nixos-anywhere
 nix run github:nix-community/nixos-anywhere -- \
   --flake .#new-host \
