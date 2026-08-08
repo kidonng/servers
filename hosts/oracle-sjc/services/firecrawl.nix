@@ -1,5 +1,7 @@
 { config, ... }:
 
+# https://github.com/firecrawl/firecrawl-docs/blob/7877f4cf689e1c1f48c8dc9f2c15fa895d93c410/contributing/self-host.mdx
+# https://github.com/firecrawl/firecrawl/blob/6ff68d3b029089aed837a881d76616c2b52d711b/docker-compose.yaml
 let
   commonEnv = {
     REDIS_URL = "redis://firecrawl-redis:6379";

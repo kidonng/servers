@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+# https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/hindsight-docs/docs/developer/installation.md
+# https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/hindsight-docs/docs/developer/configuration.md
+# https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/hindsight-docs/docs/developer/multilingual.md
+# https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/docker/docker-compose/pgroonga/docker-compose.yaml
+# https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/docker/docker-compose/pgroonga/Dockerfile
 let
   postgresWithExts = pkgs.postgresql_17.withPackages (p: [
     p.pgvector

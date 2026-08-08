@@ -1,5 +1,6 @@
 { config, ... }:
 
+# https://github.com/linuxserver/docker-helium/blob/34024391e7ee91b9d841f623246838d953fe852f/README.md#usage
 {
   systemd.tmpfiles.rules = [
     "d /var/lib/helium 0700 999 999 - -"

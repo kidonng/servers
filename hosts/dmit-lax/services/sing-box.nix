@@ -1,5 +1,7 @@
 { config, ... }:
 
+# https://sing-box.sagernet.org/manual/proxy-protocol/shadowsocks/
+# https://sing-box.sagernet.org/manual/proxy-protocol/hysteria2/
 let
   shadowsocksPort = 10724;
   hysteria2Port = 20724;
