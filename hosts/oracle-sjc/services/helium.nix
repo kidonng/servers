@@ -25,6 +25,7 @@
             HELIUM_CLI = builtins.concatStringsSep " " [
               "--proxy-server=socks5://100.89.204.14:7890" # dmit-lax
               "--remote-debugging-port=9222"
+              "--remote-allow-origins=*"
             ];
           };
           shmSize = "4g";
