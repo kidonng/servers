@@ -6,7 +6,11 @@ let
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/cli-config.yaml.example
   hermesConfig = yaml.generate "hermes-config.yaml" {
     model.default = "~deepseek/deepseek-v4-flash-latest";
-    auxiliary.vision.model = "xiaomi/mimo-v2.5";
+    auxiliary.vision = {
+      # Default auto is buggy
+      provider = "openrouter";
+      model = "xiaomi/mimo-v2.5";
+    };
     compression = {
       threshold = 0.20;
       target_ratio = 0.10;
