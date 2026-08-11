@@ -12,6 +12,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/nix.nix
     ../../modules/ssh.nix
     ./hardware.nix
+    ./services/datadog.nix
     ./services/firecrawl.nix
     ./services/helium.nix
     ./services/hermes-agent.nix
