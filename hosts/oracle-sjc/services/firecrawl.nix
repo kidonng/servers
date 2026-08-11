@@ -15,8 +15,8 @@ let
     POSTGRES_PORT = "5432";
     USE_DB_AUTHENTICATION = "false";
 
-    NUM_WORKERS_PER_QUEUE = "8";
-    CRAWL_CONCURRENT_REQUESTS = "10";
+    NUM_WORKERS_PER_QUEUE = "4";
+    CRAWL_CONCURRENT_REQUESTS = "4";
     MAX_CONCURRENT_JOBS = "5";
     BROWSER_POOL_SIZE = "5";
 
@@ -45,9 +45,8 @@ in
           environments = {
             PORT = "3000";
             PROXY_SERVER = "100.89.204.14:7890"; # dmit-lax
-            MAX_CONCURRENT_PAGES = "10";
+            MAX_CONCURRENT_PAGES = "4";
           };
-          podmanArgs = [ "--cpus=2.0" ];
           memory = "4g";
           tmpfses = [ "/tmp/.cache:noexec,nosuid,size=1g" ];
           logDriver = "json-file";
@@ -75,7 +74,6 @@ in
           };
           ulimits = [ "nofile=65535:65535" ];
           exec = "node dist/src/harness.js --start-docker";
-          podmanArgs = [ "--cpus=4.0" ];
           memory = "8g";
           logDriver = "json-file";
           logOptions = [ "max-size=10m" "max-file=3" "compress=true" ];
