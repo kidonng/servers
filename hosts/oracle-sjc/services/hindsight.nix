@@ -131,10 +131,10 @@ in
           ];
           environments = {
             HINDSIGHT_API_LLM_PROVIDER = "openrouter";
-            HINDSIGHT_API_LLM_MODEL = "~deepseek/deepseek-v4-flash-latest";
+            HINDSIGHT_API_LLM_MODEL = "meta/muse-spark-1.2-contributor";
 
             HINDSIGHT_API_EMBEDDINGS_PROVIDER = "litellm-sdk";
-            HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_MODEL = "jina_ai/jina-embeddings-v5-text-small";
+            HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_MODEL = "jina_ai/jina-embeddings-v5-omni-small";
             # Jina doesn't support default `float`
             HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_ENCODING_FORMAT = "";
 
