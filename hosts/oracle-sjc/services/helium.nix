@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 # https://github.com/linuxserver/docker-helium/blob/34024391e7ee91b9d841f623246838d953fe852f/README.md#usage
 {
@@ -6,24 +6,19 @@
     "d /var/lib/helium 0700 999 999 - -"
   ];
 
-  virtualisation.quadlet = let
-    inherit (config.virtualisation.quadlet) containers;
-  in {
+  virtualisation.quadlet = {
     containers = {
       helium = {
         containerConfig = {
           image = "lscr.io/linuxserver/helium:latest";
+          networks = [ "host" ];
           volumes = [ "/var/lib/helium:/config" ];
-          publishPorts = [
-            "3000:3000" # HTTP
-            "3001:3001" # HTTPS
-            "9222:9223" # socat -> CDP
-          ];
           environments = {
             PUID = "999";
             PGID = "999";
             HELIUM_CLI = builtins.concatStringsSep " " [
               "--proxy-server=socks5://100.89.204.14:7890" # dmit-lax
+              "--proxy-bypass-list=100.64.0.0/10;*.ts.net;<local>"
               "--remote-debugging-port=9222"
               "--remote-allow-origins=*"
             ];
@@ -35,22 +30,6 @@
         serviceConfig = {
           Restart = "always";
           RestartSec = "10";
-        };
-      };
-
-      helium-cdp-proxy = {
-        containerConfig = {
-          image = "docker.io/alpine/socat";
-          networks = [ "container:helium" ];
-          exec = [ "tcp-listen:9223,fork,reuseaddr" "tcp:127.0.0.1:9222" ];
-        };
-        unitConfig = {
-          Requires = [ containers.helium.ref ];
-          After = [ containers.helium.ref ];
-        };
-        serviceConfig = {
-          Restart = "always";
-          RestartSec = "5";
         };
       };
     };
