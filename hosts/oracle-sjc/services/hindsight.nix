@@ -131,6 +131,7 @@ in
           ];
           environments = {
             HINDSIGHT_API_LLM_PROVIDER = "openrouter";
+            # DeepSeek overthinks, not a good fit for Hindsight
             HINDSIGHT_API_LLM_MODEL = "meta/muse-spark-1.2-contributor";
 
             HINDSIGHT_API_EMBEDDINGS_PROVIDER = "litellm-sdk";

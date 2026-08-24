@@ -5,7 +5,8 @@ let
   yaml = pkgs.formats.yaml { };
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/cli-config.yaml.example
   hermesConfig = yaml.generate "hermes-config.yaml" {
-    model.default = "meta/muse-spark-1.2-contributor";
+    # Tried muse, but it frequently misses cache
+    model.default = "deepseek/deepseek-v4-flash-vision-exp";
     compression = {
       threshold = 0.20;
       target_ratio = 0.10;
