@@ -13,6 +13,8 @@ let
     };
     memory.provider = "hindsight";
     streaming.enabled = true;
+    # Allow access to Tailscale
+    security.allow_private_urls = true;
   };
 in
 {
