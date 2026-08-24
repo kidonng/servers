@@ -26,9 +26,12 @@ in
     content = ''
       OPENROUTER_API_KEY=${config.sops.placeholder."hermes/openrouter"}
       TELEGRAM_BOT_TOKEN=${config.sops.placeholder."hermes/telegram"}
+
       TELEGRAM_ALLOWED_USERS=793708595
       TELEGRAM_HOME_CHANNEL=793708595
+
       FIRECRAWL_API_URL=http://localhost:3002
+      BROWSER_CDP_URL=ws://localhost:9222
     '';
   };
 
@@ -54,8 +57,6 @@ in
             HERMES_WRITE_SAFE_ROOT = "/opt/data:/tmp";
             # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/plugins/memory/hindsight/README.md#environment-variables
             HINDSIGHT_MODE = "local_external";
-            # https://github.com/vercel-labs/agent-browser/blob/acbc22bdc5d4f6c5a88d97d4a4745d3c5eb0591f/docs/src/app/cdp-mode/page.mdx#auto-connect
-            AGENT_BROWSER_AUTO_CONNECT = "1";
           };
           exec = [ "gateway" "run" ];
         };
