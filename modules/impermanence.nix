@@ -27,7 +27,11 @@
       RemainAfterExit = true;
     };
 
-    path = with pkgs; [ btrfs-progs coreutils util-linux ];
+    path = [
+      pkgs.btrfs-progs
+      pkgs.coreutils
+      pkgs.util-linux
+    ];
 
     script = ''
       rootPart=/root_part
