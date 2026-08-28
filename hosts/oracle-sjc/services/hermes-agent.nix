@@ -8,8 +8,8 @@ let
     # Tried muse, but it frequently misses cache
     model.default = "deepseek/deepseek-v4-flash-vision-exp";
     compression = {
-      threshold = 0.20;
-      target_ratio = 0.10;
+      threshold = 0.25; # compress at ~250K (for model with 1M context)
+      target_ratio = 0.20; # keep ~50k (for model with 1M context)
     };
     memory.provider = "hindsight";
     streaming.enabled = true;
