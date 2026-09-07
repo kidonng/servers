@@ -16,6 +16,7 @@ in
     "sing-box/shadowsocks/users/bro" = sopsConfig;
     "sing-box/shadowsocks/users/hxq" = sopsConfig;
     "sing-box/shadowsocks/users/sov" = sopsConfig;
+    "sing-box/shadowsocks/users/yao" = sopsConfig;
     "sing-box/hysteria2/users/kid" = sopsConfig;
     "sing-box/acme/cloudflare" = sopsConfig;
   };
@@ -52,6 +53,10 @@ in
             {
               name = "sov";
               password._secret = config.sops.secrets."sing-box/shadowsocks/users/sov".path;
+            }
+            {
+              name = "yao";
+              password._secret = config.sops.secrets."sing-box/shadowsocks/users/yao".path;
             }
           ];
           multiplex.enabled = true;
