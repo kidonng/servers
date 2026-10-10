@@ -74,7 +74,8 @@ in
           tls = {
             enabled = true;
             server_name = "aria.xuann.wang";
-            acme = {
+            certificate_provider = {
+              type = "acme";
               domain = "aria.xuann.wang";
               dns01_challenge = {
                 provider = "cloudflare";
