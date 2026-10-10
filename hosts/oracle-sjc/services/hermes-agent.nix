@@ -6,11 +6,7 @@ let
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/cli-config.yaml.example
   hermesConfig = yaml.generate "hermes-config.yaml" {
     # Tried muse, but it frequently misses cache
-    model.default = "deepseek/deepseek-v4-flash-vision-exp";
-    compression = {
-      threshold = 0.25; # compress at ~250K (for model with 1M context)
-      target_ratio = 0.20; # keep ~50k (for model with 1M context)
-    };
+    model.default = "deepseek/deepseek-v4.1-flash";
     memory.provider = "hindsight";
     streaming.enabled = true;
     # Allow access to Tailscale
