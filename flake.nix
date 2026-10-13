@@ -10,10 +10,30 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { ... }@inputs: {
-    nixosConfigurations = {
-      dmit-lax = import ./hosts/dmit-lax { inherit inputs; };
-      oracle-sjc = import ./hosts/oracle-sjc { inherit inputs; };
+  outputs =
+    { nixpkgs, ... }@inputs:
+    let
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forAllSystems =
+        f:
+        nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+    in
+    {
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.sops
+          ];
+        };
+      });
+
+      nixosConfigurations = {
+        dmit-lax = import ./hosts/dmit-lax { inherit inputs; };
+        oracle-sjc = import ./hosts/oracle-sjc { inherit inputs; };
+      };
     };
-  };
 }
