@@ -5,8 +5,10 @@ let
   yaml = pkgs.formats.yaml { };
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/cli-config.yaml.example
   hermesConfig = yaml.generate "hermes-config.yaml" {
-    # Tried muse, but it frequently misses cache
-    model.default = "deepseek/deepseek-v4.1-flash";
+    model = {
+      provider = "opencode-go";
+      default = "deepseek-v4.1-flash";
+    };
     memory.provider = "hindsight";
     streaming.enabled = true;
     # Allow access to Tailscale
@@ -15,6 +17,7 @@ let
 in
 {
   sops.secrets = {
+    "hermes/opencode" = { };
     "hermes/openrouter" = { };
     "hermes/telegram" = { };
   };
@@ -22,6 +25,7 @@ in
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/website/docs/reference/environment-variables.md
   sops.templates."hermes-env" = {
     content = ''
+      OPENCODE_GO_API_KEY=${config.sops.placeholder."hermes/opencode"}
       OPENROUTER_API_KEY=${config.sops.placeholder."hermes/openrouter"}
       TELEGRAM_BOT_TOKEN=${config.sops.placeholder."hermes/telegram"}
 

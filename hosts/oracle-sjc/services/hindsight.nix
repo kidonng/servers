@@ -74,13 +74,14 @@ let
 in
 {
   sops.secrets = {
+    "hindsight/opencode" = { };
     "hindsight/openrouter" = { };
     "hindsight/jina" = { };
   };
 
   sops.templates."hindsight-env" = {
     content = ''
-      HINDSIGHT_API_LLM_API_KEY=${config.sops.placeholder."hindsight/openrouter"}
+      HINDSIGHT_API_LLM_API_KEY=${config.sops.placeholder."hindsight/opencode"}
       HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_API_KEY=${config.sops.placeholder."hindsight/jina"}
       HINDSIGHT_API_RERANKER_LITELLM_SDK_API_KEY=${config.sops.placeholder."hindsight/jina"}
     '';
@@ -130,9 +131,11 @@ in
             config.sops.templates."hindsight-env".path
           ];
           environments = {
-            HINDSIGHT_API_LLM_PROVIDER = "openrouter";
-            # DeepSeek overthinks, not a good fit for Hindsight
-            HINDSIGHT_API_LLM_MODEL = "meta/muse-spark-1.3-contributor";
+            # Hindsight's `opencode-go` provider uses /chat/completions,
+            # but Muse Spark on OpenCode Go only supports /responses
+            HINDSIGHT_API_LLM_PROVIDER = "openai-responses";
+            HINDSIGHT_API_LLM_BASE_URL = "https://opencode.ai/zen/go/v1";
+            HINDSIGHT_API_LLM_MODEL = "muse-spark-1.3-contributor";
 
             HINDSIGHT_API_EMBEDDINGS_PROVIDER = "litellm-sdk";
             HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_MODEL = "jina_ai/jina-embeddings-v5-omni-small";
