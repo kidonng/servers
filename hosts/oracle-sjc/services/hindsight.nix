@@ -134,7 +134,7 @@ in
             # Hindsight's `opencode-go` provider uses /chat/completions,
             # but Muse Spark on OpenCode Go only supports /responses
             HINDSIGHT_API_LLM_PROVIDER = "openai-responses";
-            HINDSIGHT_API_LLM_BASE_URL = "https://opencode.ai/zen/go/v1";
+            HINDSIGHT_API_LLM_BASE_URL = "https://opencode.ai/inference/go/v1";
             HINDSIGHT_API_LLM_MODEL = "muse-spark-1.3-contributor";
 
             HINDSIGHT_API_EMBEDDINGS_PROVIDER = "litellm-sdk";
