@@ -50,13 +50,14 @@ in
           volumes = [
             "/var/lib/hermes-agent:/opt/data"
             "${hermesConfig}:/opt/data/config.yaml:ro"
+            "/var/lib/helium:/var/lib/helium"
           ];
           environmentFiles = [
             config.sops.templates."hermes-env".path
           ];
           environments = {
-            # Allow /tmp to make life easier for agents
-            HERMES_WRITE_SAFE_ROOT = "/opt/data:/tmp";
+            # Allow /tmp and Helium to make life easier for agents
+            HERMES_WRITE_SAFE_ROOT = "/opt/data:/tmp:/var/lib/helium";
             # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/plugins/memory/hindsight/README.md#environment-variables
             HINDSIGHT_MODE = "local_external";
           };
