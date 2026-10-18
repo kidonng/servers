@@ -51,6 +51,7 @@ in
             "/var/lib/hermes-agent:/opt/data"
             "${hermesConfig}:/opt/data/config.yaml:ro"
             "/var/lib/helium:/var/lib/helium"
+            "/run/podman/podman.sock:/var/run/docker.sock"
           ];
           environmentFiles = [
             config.sops.templates."hermes-env".path
