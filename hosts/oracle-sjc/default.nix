@@ -4,12 +4,12 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { inherit inputs; };
   modules = [
-    inputs.sops-nix.nixosModules.sops
     inputs.quadlet-nix.nixosModules.quadlet
     ../../modules/disk-uefi.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
     ../../modules/nix.nix
+    ../../modules/sops.nix
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/datadog.nix
@@ -19,10 +19,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ./services/hindsight.nix
     ./services/tailscale.nix
     {
-      sops = {
-        defaultSopsFile = ./secrets.yaml;
-        age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-      };
+      sops.defaultSopsFile = ./secrets.yaml;
 
       networking.hostName = "oracle-sjc";
 

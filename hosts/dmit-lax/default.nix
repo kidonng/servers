@@ -4,20 +4,17 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { inherit inputs; };
   modules = [
-    inputs.sops-nix.nixosModules.sops
     ../../modules/disk-bios.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
     ../../modules/nix.nix
+    ../../modules/sops.nix
     ../../modules/ssh.nix
     ./hardware.nix
     ./services/sing-box.nix
     ./services/tailscale.nix
     {
-      sops = {
-        defaultSopsFile = ./secrets.yaml;
-        age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-      };
+      sops.defaultSopsFile = ./secrets.yaml;
 
       networking.hostName = "dmit-lax";
 
