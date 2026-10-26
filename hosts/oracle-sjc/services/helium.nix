@@ -1,11 +1,18 @@
 { ... }:
 
 # https://github.com/linuxserver/docker-helium/blob/34024391e7ee91b9d841f623246838d953fe852f/README.md#usage
+let
+  stateDirectory = "/var/lib/helium";
+in
 {
   systemd.tmpfiles.rules = [
-    "d /var/lib/helium 0755 999 999 - -"
-    "d /var/lib/helium/Downloads 0777 999 999 - -"
+    "d ${stateDirectory} 0755 999 999 - -"
+    "d ${stateDirectory}/Downloads 0777 999 999 - -"
   ];
+
+  environment.persistence."/persist" = {
+    directories = [ stateDirectory ];
+  };
 
   virtualisation.quadlet = {
     containers = {
@@ -13,7 +20,7 @@
         containerConfig = {
           image = "lscr.io/linuxserver/helium:latest";
           networks = [ "host" ];
-          volumes = [ "/var/lib/helium:/config" ];
+          volumes = [ "${stateDirectory}:/config" ];
           environments = {
             PUID = "999";
             PGID = "999";

@@ -6,6 +6,9 @@
 # https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/docker/docker-compose/pgroonga/docker-compose.yaml
 # https://github.com/vectorize-io/hindsight/blob/4b2041eb3de5c4235f4a3dd5619fc47cce782e29/docker/docker-compose/pgroonga/Dockerfile
 let
+  stateDirectory = "/var/lib/hindsight";
+  postgresData = "${stateDirectory}/postgres";
+
   postgresWithExts = pkgs.postgresql_17.withPackages (p: [
     p.pgvector
     p.pgroonga
@@ -88,9 +91,13 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/lib/hindsight/postgres 0700 999 999 - -"
-    "h /var/lib/hindsight/postgres - - - - +C"
+    "d ${postgresData} 0700 999 999 - -"
+    "h ${postgresData} - - - - +C"
   ];
+
+  environment.persistence."/persist" = {
+    directories = [ stateDirectory ];
+  };
 
   virtualisation.quadlet = let
     inherit (config.virtualisation.quadlet) containers networks;
@@ -104,7 +111,7 @@ in
         containerConfig = {
           image = "docker-archive:${hindsightPostgresImage}";
           networks = [ networks.hindsight.ref ];
-          volumes = [ "/var/lib/hindsight/postgres:/var/lib/postgresql/data" ];
+          volumes = [ "${postgresData}:/var/lib/postgresql/data" ];
           environments = {
             POSTGRES_USER = "hindsight";
             POSTGRES_PASSWORD = "hindsight";

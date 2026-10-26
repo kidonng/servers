@@ -3,11 +3,13 @@
 # https://sing-box.sagernet.org/manual/proxy-protocol/shadowsocks/
 # https://sing-box.sagernet.org/manual/proxy-protocol/hysteria2/
 let
+  service = config.systemd.services.sing-box;
+  sopsConfig = {
+    reloadUnits = [ service.name ];
+  };
+
   shadowsocksPort = 10724;
   hysteria2Port = 20724;
-  sopsConfig = {
-    reloadUnits = [ config.systemd.services.sing-box.name ];
-  };
 in
 {
   sops.secrets = {
@@ -91,5 +93,9 @@ in
   networking.firewall = {
     allowedTCPPorts = [ shadowsocksPort ];
     allowedUDPPorts = [ shadowsocksPort hysteria2Port ];
+  };
+
+  environment.persistence."/persist" = {
+    directories = [ "/var/lib/${service.serviceConfig.StateDirectory}" ];
   };
 }

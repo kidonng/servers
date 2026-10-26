@@ -4,7 +4,6 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { inherit inputs; };
   modules = [
-    inputs.quadlet-nix.nixosModules.quadlet
     ../../modules/disk-uefi.nix
     ../../modules/impermanence.nix
     ../../modules/network.nix
@@ -17,6 +16,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ./services/helium.nix
     ./services/hermes-agent.nix
     ./services/hindsight.nix
+    ./services/podman.nix
     ./services/tailscale.nix
     {
       sops.defaultSopsFile = ./secrets.yaml;

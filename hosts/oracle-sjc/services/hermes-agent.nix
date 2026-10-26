@@ -2,6 +2,8 @@
 
 # https://github.com/NousResearch/hermes-agent/blob/2389564d83f5e31a293727f471631dab46601e2b/docker-compose.yml
 let
+  stateDirectory = "/var/lib/hermes-agent";
+
   yaml = pkgs.formats.yaml { };
   # https://github.com/NousResearch/hermes-agent/blob/3d7dda4cf42176d587b459345c56236a26030324/cli-config.yaml.example
   hermesConfig = yaml.generate "hermes-config.yaml" {
@@ -38,8 +40,12 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/lib/hermes-agent 0750 10000 10000 - -"
+    "d ${stateDirectory} 0750 10000 10000 - -"
   ];
+
+  environment.persistence."/persist" = {
+    directories = [ stateDirectory ];
+  };
 
   virtualisation.quadlet = {
     containers = {
@@ -48,7 +54,7 @@ in
           image = "docker.io/nousresearch/hermes-agent:latest";
           networks = [ "host" ];
           volumes = [
-            "/var/lib/hermes-agent:/opt/data"
+            "${stateDirectory}:/opt/data"
             "${hermesConfig}:/opt/data/config.yaml:ro"
             "/var/lib/helium:/var/lib/helium"
             "/run/podman/podman.sock:/var/run/docker.sock"

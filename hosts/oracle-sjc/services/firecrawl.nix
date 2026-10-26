@@ -3,6 +3,9 @@
 # https://github.com/firecrawl/firecrawl-docs/blob/7877f4cf689e1c1f48c8dc9f2c15fa895d93c410/contributing/self-host.mdx
 # https://github.com/firecrawl/firecrawl/blob/6ff68d3b029089aed837a881d76616c2b52d711b/docker-compose.yaml
 let
+  stateDirectory = "/var/lib/firecrawl";
+  postgresData = "${stateDirectory}/postgres";
+
   commonEnv = {
     REDIS_URL = "redis://firecrawl-redis:6379";
     REDIS_RATE_LIMIT_URL = "redis://firecrawl-redis:6379";
@@ -26,9 +29,13 @@ let
 in
 {
   systemd.tmpfiles.rules = [
-    "d /var/lib/firecrawl/postgres 0700 999 999 - -"
-    "h /var/lib/firecrawl/postgres - - - - +C"
+    "d ${postgresData} 0700 999 999 - -"
+    "h ${postgresData} - - - - +C"
   ];
+
+  environment.persistence."/persist" = {
+    directories = [ stateDirectory ];
+  };
 
   virtualisation.quadlet = let
     inherit (config.virtualisation.quadlet) containers networks;
@@ -137,7 +144,7 @@ in
         containerConfig = {
           image = "ghcr.io/firecrawl/nuq-postgres:latest";
           networks = [ networks.firecrawl.ref ];
-          volumes = [ "/var/lib/firecrawl/postgres:/var/lib/postgresql/data" ];
+          volumes = [ "${postgresData}:/var/lib/postgresql/data" ];
           environments = {
             POSTGRES_USER = "postgres";
             POSTGRES_PASSWORD = "postgres";

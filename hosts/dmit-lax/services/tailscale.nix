@@ -16,6 +16,10 @@
 
   networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
 
+  environment.persistence."/persist" = {
+    directories = [ "/var/lib/tailscale" ];
+  };
+
   systemd.services.tailscale-udp-gro = {
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];

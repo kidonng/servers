@@ -11,4 +11,8 @@
   };
 
   networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
+
+  environment.persistence."/persist" = {
+    directories = [ "/var/lib/tailscale" ];
+  };
 }
