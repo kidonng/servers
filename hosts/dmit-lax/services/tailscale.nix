@@ -14,6 +14,8 @@
     ];
   };
 
+  networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
+
   systemd.services.tailscale-udp-gro = {
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];

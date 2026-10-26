@@ -1,8 +1,9 @@
-{ ... }:
+{ config, ... }:
 
 {
   services.openssh = {
     enable = true;
+    openFirewall = !config.services.tailscale.enable;
     hostKeys = [
       {
         type = "ed25519";
