@@ -11,8 +11,6 @@
     '';
   };
 
-  systemd.sockets.podman.enable = true;
-
   virtualisation.quadlet = {
     containers = {
       dd-agent = {
