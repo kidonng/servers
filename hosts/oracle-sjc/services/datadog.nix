@@ -27,6 +27,7 @@
           environments = {
             DD_SITE = "datadoghq.com";
             DD_DOGSTATSD_NON_LOCAL_TRAFFIC = "true";
+            DD_LOG_LEVEL = "warn";
           };
         };
         serviceConfig = {

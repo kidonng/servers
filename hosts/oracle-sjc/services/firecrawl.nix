@@ -126,11 +126,6 @@ in
           # Erlang requires .erlang.cookie owner to match the running process user
           user = "rabbitmq";
           exec = "rabbitmq-server";
-          healthCmd = "rabbitmq-diagnostics -q check_running";
-          healthInterval = "5s";
-          healthTimeout = "5s";
-          healthRetries = 3;
-          healthStartPeriod = "5s";
           logDriver = "json-file";
           logOptions = [ "max-size=5m" "max-file=2" "compress=true" ];
         };
