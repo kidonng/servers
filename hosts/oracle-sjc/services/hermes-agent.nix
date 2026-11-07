@@ -41,6 +41,8 @@ in
 
   systemd.tmpfiles.rules = [
     "d ${stateDirectory} 0750 10000 10000 - -"
+    # Seed initial config
+    "C ${stateDirectory}/config.yaml 0640 10000 10000 - ${hermesConfig}"
   ];
 
   environment.persistence."/persist" = {
@@ -55,7 +57,6 @@ in
           networks = [ "host" ];
           volumes = [
             "${stateDirectory}:/opt/data"
-            "${hermesConfig}:/opt/data/config.yaml:ro"
             "/var/lib/helium:/var/lib/helium"
             "/run/podman/podman.sock:/var/run/docker.sock"
           ];
