@@ -34,7 +34,6 @@ in
       TELEGRAM_ALLOWED_USERS=793708595
       TELEGRAM_HOME_CHANNEL=793708595
 
-      FIRECRAWL_API_URL=http://localhost:3002
       BROWSER_CDP_URL=ws://localhost:9222
     '';
   };
