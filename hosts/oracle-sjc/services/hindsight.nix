@@ -138,11 +138,9 @@ in
             config.sops.templates."hindsight-env".path
           ];
           environments = {
-            # Hindsight's `opencode-go` provider uses /chat/completions,
-            # but Muse Spark on OpenCode Go only supports /responses
             HINDSIGHT_API_LLM_PROVIDER = "openai-responses";
-            HINDSIGHT_API_LLM_BASE_URL = "https://opencode.ai/inference/go/v1";
-            HINDSIGHT_API_LLM_MODEL = "muse-spark-1.3-contributor";
+            HINDSIGHT_API_LLM_BASE_URL = "https://opencode.ai/inference/go/openai/v1";
+            HINDSIGHT_API_LLM_MODEL = "gpt-6-luna";
 
             HINDSIGHT_API_EMBEDDINGS_PROVIDER = "litellm-sdk";
             HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_MODEL = "jina_ai/jina-embeddings-v5-omni-small";
