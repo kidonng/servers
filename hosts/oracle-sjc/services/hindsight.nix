@@ -86,7 +86,7 @@ in
     content = ''
       HINDSIGHT_API_LLM_API_KEY=${config.sops.placeholder."hindsight/opencode"}
       HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_API_KEY=${config.sops.placeholder."hindsight/jina"}
-      HINDSIGHT_API_RERANKER_LITELLM_SDK_API_KEY=${config.sops.placeholder."hindsight/jina"}
+      HINDSIGHT_API_DECISION_MODEL_API_KEY=${config.sops.placeholder."hindsight/openrouter"}
     '';
   };
 
@@ -147,8 +147,18 @@ in
             # Jina doesn't support default `float`
             HINDSIGHT_API_EMBEDDINGS_LITELLM_SDK_ENCODING_FORMAT = "";
 
-            HINDSIGHT_API_RERANKER_PROVIDER = "litellm-sdk";
-            HINDSIGHT_API_RERANKER_LITELLM_SDK_MODEL = "jina_ai/jina-reranker-v3.5";
+            # No model: recall keeps the merged search order
+            # Decision model is its ranker
+            # https://hindsight.vectorize.io/developer/models#reranker-rrf
+            HINDSIGHT_API_RERANKER_PROVIDER = "rrf";
+
+            HINDSIGHT_API_DECISION_MODEL_PROVIDER = "typesafe";
+            HINDSIGHT_API_DECISION_MODEL_BASE_URL = "https://openrouter.ai/api";
+            HINDSIGHT_API_DECISION_MODEL_MODEL = "~perplexity/pplx-decider-latest";
+
+            HINDSIGHT_API_RECALL_DECISION_MODEL_PROVIDER = "typesafe";
+            HINDSIGHT_API_RECALL_DECISION_MODEL_PRUNE = "true";
+            HINDSIGHT_API_RECALL_DECISION_MODEL_DEDUP = "true";
 
             HINDSIGHT_API_DATABASE_URL = "postgresql://hindsight:hindsight@hindsight-postgres:5432/hindsight";
             HINDSIGHT_API_WORKER_ID = "hindsight";
